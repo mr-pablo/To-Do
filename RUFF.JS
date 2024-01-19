@@ -84,7 +84,7 @@
 //         console.log(`edited index = ${edited_index}`);
 
 //         data_array[edited_index] = edited_data;
-        
+
 //         console.log(data_array[edited_index]);
 
 
@@ -187,7 +187,7 @@ Form.addEventListener("submit", (e) => {
 });
 
 function check(number) {
-    edited_index = number -1 
+    edited_index = number - 1
 }
 
 function pass_index(numpassing) {
@@ -218,7 +218,7 @@ function edit_todo() {
         console.log(data_array);
 
         let new_title = data_array[edited_index].title
-        let new_discription = data_array[edited_index].discription  
+        let new_discription = data_array[edited_index].discription
         let new_date = data_array[edited_index].date;
 
         const cards = document.getElementsByClassName('passing-card')
@@ -230,21 +230,21 @@ function edit_todo() {
 
 }
 
-    function markascomplete(index) {
-        console.log(`num = ${num}`);
-        console.log(`index = ${edited_index}`);
-        console.log(`markascomplete index = ${index - 1}`);
-        let div_array = document.getElementsByClassName("card")
-        let div_element = div_array[index - 1]
-        // console.log(div_element)
-        if (div_element.classList.contains("completeclass")) {
-            div_element.classList.remove("completeclass");
+function markascomplete(index) {
+    console.log(`num = ${num}`);
+    console.log(`index = ${edited_index}`);
+    console.log(`markascomplete index = ${index - 1}`);
+    let div_array = document.getElementsByClassName("card")
+    let div_element = div_array[index - 1]
+    // console.log(div_element)
+    if (div_element.classList.contains("completeclass")) {
+        div_element.classList.remove("completeclass");
 
-        } else {
-            div_element.classList.add("completeclass");
-        }
-        
+    } else {
+        div_element.classList.add("completeclass");
     }
+
+}
 
 function deletetodo(index) {
 
@@ -271,7 +271,7 @@ function arranged_div() {
     number = 0
 
     while (number < data_array.length) {
-
+        number++
 
         let date = data_array[number].date
         let Title = data_array[number].title
@@ -280,7 +280,7 @@ function arranged_div() {
 
 
         node = document.createElement("div")
-        node.className = "passing-card" 
+        node.className = "passing-card"
 
         node.innerHTML = ` <div class="card" >
             <div id="numb">${number}</div>
@@ -291,11 +291,11 @@ function arranged_div() {
                 <button onclick ="pass_index(${number})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
                 <button onclick ="deletetodo(${number})" type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
                 <button onclick ="markascomplete(${number
-                })" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
+            })" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
             </div>
             </div> `
         document.getElementById("scrolling-div").appendChild(node)
-        number++
+
 
     }
 
