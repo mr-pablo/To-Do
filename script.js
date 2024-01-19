@@ -1,4 +1,5 @@
 
+
 let Form = document.getElementById("form")
 let edit_form = document.getElementById("edit-form")
 let data = {}
@@ -15,7 +16,11 @@ Form.addEventListener("submit", (e) => {
     Discription = document.getElementById("discription").value
     date = document.getElementById("date").value
     while (true) {
+        console.log(`num = ${num}`);
+        console.log(`index = ${edited_index}`);
         num++
+        console.log(`num = ${num}`);
+        console.log(`index = ${edited_index}`);
 
         data = {
             title: `${Title}`,
@@ -27,18 +32,17 @@ Form.addEventListener("submit", (e) => {
         node.className = "passing-card"
         node.innerHTML = ` <div class="card" >
         <div id="numb">${num}</div>
-        <div class="card-header" id="display-date${num - 1}">${date}</div>
+         <div class="card-header" id="display-date">${date}</div>
         <div class="card-body">
-            <h5 class="card-title" id="display-title${num - 1}">${Title}</h5>
-            <p class="card-text" id="display-discription${num - 1}">${Discription}</p>
-            <button onclick ="pass_index(${num}), check(${num})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
-            <button type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
+            <h5 class="card-title" id="display-title" >${Title}</h5>
+            <p class="card-text" id="display-discription">${Discription}</p>
+            <button onclick ="pass_index(${num})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
+            <button onclick ="deletetodo(${num})" type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
             <button onclick ="markascomplete(${num})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
         </div>
         </div> `
 
         document.getElementById("scrolling-div").appendChild(node)
-        // document.getElementById("")
         Form.reset();
         return
 
@@ -50,11 +54,12 @@ function check(number) {
 }
 
 function pass_index(numpassing) {
+    check(numpassing)
+    console.log(numpassing - 1);
     document.getElementById("pass-title").value = data_array[numpassing - 1].title
     document.getElementById("pass-discription").value = data_array[numpassing - 1].discription
     document.getElementById("pass-date").value = data_array[numpassing - 1].date
 }
-
 
 function edit_todo() {
     edit_form.addEventListener("submit", (e) => {
@@ -62,100 +67,43 @@ function edit_todo() {
         edit_title = document.getElementById("pass-title").value;
         edit_discription = document.getElementById("pass-discription").value;
         edit_date = document.getElementById("pass-date").value;
-
-
-
         edited_data = {
             title: `${edit_title}`,
             discription: `${edit_discription}`,
             date: `${edit_date}`
         }
 
-        console.log(edited_index);
+        console.log(`edited index = ${edited_index}`);
 
         data_array[edited_index] = edited_data;
 
         console.log(data_array[edited_index]);
-
-
+        console.log(data_array);
 
         let new_title = data_array[edited_index].title
         let new_discription = data_array[edited_index].discription
-        let new_date = data_array[edited_index].date
+        let new_date = data_array[edited_index].date;
 
-        document.getElementById(`display-date${edited_index}`).innerHTML = `${new_date}`
-        document.getElementById(`display-title${edited_index}`).innerHTML = `${new_title}`
-        document.getElementById(`display-discription${edited_index}`).innerHTML = `${new_discription}`
+        const cards = document.getElementsByClassName('passing-card')
+        const editingCard = cards[edited_index]
+        editingCard.querySelector(`#display-date`).innerHTML = `${new_date}`
+        editingCard.querySelector(`#display-title`).innerHTML = `${new_title}`
+        editingCard.querySelector(`#display-discription`).innerHTML = `${new_discription}`
     });
 
 }
 
 function markascomplete(index) {
+    console.log(index);
+    let div_array = document.getElementsByClassName("card")
+    let div_element = div_array[index - 1]
 
-    let completecheckdate = document.getElementById(`display-date${index - 1}`)
-
-
-    if (completecheckdate.classList.contains("completeclass")) {
-        completecheckdate.classList.remove("completeclass");
-        document.getElementById(`display-date${index - 1}`).style.textDecoration = "none";
-        document.getElementById(`display-title${index - 1}`).style.textDecoration = "none";
-        document.getElementById(`display-discription${index - 1}`).style.textDecoration = "none";
+    if (div_element.classList.contains("completeclass")) {
+        div_element.classList.remove("completeclass");
 
     } else {
-        completecheckdate.classList.add("completeclass");
-        document.getElementById(`display-date${index - 1}`).style.textDecoration = "line-through";
-        document.getElementById(`display-title${index - 1}`).style.textDecoration = "line-through";
-        document.getElementById(`display-discription${index - 1}`).style.textDecoration = "line-through";
+        div_element.classList.add("completeclass");
     }
+
 }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-// array = [{
-//     car:"bmw"
-//     type:"sports"
-// }]
-
-
-
-
-
-
-
-
-
-
-
-
-
-// array = { title: `${Title}`,
-// discription: `${Discription}`,
-// date: `${date}`},
-
-// 1{ title: `${Title}`,
-// discription: `${Discription}`,
-// date: `${date}`},
-
-// 2{ title: `${Title}`,
-// discription: `${Discription}`,
-// date: `${date}`},
-
-// 3{ title: `${Title}`,
-// discription: `${Discription}`,
-// date: `${date}`},
-// ]

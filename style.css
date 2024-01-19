@@ -153,12 +153,13 @@ input {
     width: 50% !important;
 }
 
-/* .completeclass #display-date0{
+.completeclass #display-date{
     text-decoration: line-through;
 }
-.completeclass #display-title0{
+.completeclass #display-title{
     text-decoration: line-through;
 }
-.completeclass #display-discription0{
-    text-decoration: ;
-} */
+
+.completeclass #display-discription{
+    text-decoration: line-through;
+}
