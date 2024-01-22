@@ -43,7 +43,15 @@ body {
 
 #display-todo {
     width: 150px;
-    height: 35px;
+    height: 70px;
+    
+}
+#list_date{
+    border: 2px solid grey;
+    border-radius: 5px;
+    margin-top: 10px;
+    height: 30px;
+    display: none; 
 }
 
 select {

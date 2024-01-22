@@ -28,21 +28,7 @@ Form.addEventListener("submit", (e) => {
             date: `${date}`
         }
         data_array.push(data)
-        node = document.createElement("div")
-        node.className = "passing-card"
-        node.innerHTML = ` <div class="card" >
-        <div id="numb">${num}</div>
-         <div class="card-header" id="display-date">${date}</div>
-        <div class="card-body">
-            <h5 class="card-title" id="display-title" >${Title}</h5>
-            <p class="card-text" id="display-discription">${Discription}</p>
-            <button onclick ="pass_index(${num})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
-            <button onclick ="delete_todo(${num})" type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
-            <button onclick ="markascomplete(${num})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
-        </div>
-        </div> `
-
-        document.getElementById("scrolling-div").appendChild(node)
+        arranged_div()
         Form.reset();
         return
 
@@ -101,6 +87,7 @@ function markascomplete(index) {
 
     } else {
         div_element.classList.add("completeclass");
+        // data_array[index - 1].
     }
 
 }
@@ -124,38 +111,70 @@ function delete_todo(deleting_index) {
 
 
 function arranged_div() {
-
-    // node.innerHTML = ""
+    let scrolldiv = document.getElementById("scrolling-div")
+    scrolldiv.innerHTML = ""
     console.log(data_array);
     let count = 0;
+    let new_index = 0
 
     while (count < data_array.length) {
-        let date = data_array[count].date
-        let Title = data_array[count].title
-        let Discription = data_array[count].discription
+        
+        let selected_date = document.getElementById("list_date").value
+        if (selected_date == data_array[count].date || selected_date == "") {
 
 
-        
-        node = document.createElement("div")
-        node.className = "passing-card"
-        
-        node.innerHTML = ` <div class="card" >
-        <div id="numb">${count+1}</div>
-         <div class="card-header" id="display-date">${date}</div>
-        <div class="card-body">
-            <h5 class="card-title" id="display-title" >${Title}</h5>
-            <p class="card-text" id="display-discription">${Discription}</p>
-            <button onclick ="pass_index(${count+1})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
-            <button onclick ="delete_todo(${count+1})" type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
-            <button onclick ="markascomplete(${count+1})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
-        </div>
-        </div> `
-        document.getElementById("scrolling-div").appendChild(node)
+            let date = data_array[count].date
+            let Title = data_array[count].title
+            let Discription = data_array[count].discription
+
+
+
+            node = document.createElement("div")
+            node.className = "passing-card"
+
+            node.innerHTML = ` <div class="card" >
+            <div id="numb">${new_index+1}</div>
+             <div class="card-header" id="display-date">${date}</div>
+            <div class="card-body">
+                <h5 class="card-title" id="display-title" >${Title}</h5>
+                <p class="card-text" id="display-discription">${Discription}</p>
+                <button onclick ="pass_index(${new_index + 1})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
+                <button onclick ="delete_todo(${new_index + 1})" type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
+                <button onclick ="markascomplete(${new_index + 1})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
+            </div>
+            </div> `
+            document.getElementById("scrolling-div").appendChild(node)
+            new_index++
+
+        }
+
         count++
 
 
     }
-    num = count
+    // num = count
 
 }
+
+
+function show_date_input() {
+    let value = 0
+    value = document.getElementById("select_box").value
+    console.log(value);
+    let Selected_date = document.getElementById("list_date")
+    if (value == 2) {
+        document.getElementById("list_date").style.display = "block"
+    } if (value == 1) {
+        document.getElementById("list_date").style.display = "none"
+
+        Selected_date.value = ""
+
+        arranged_div()
+    }
+
+
+}
+
+
+
 

@@ -301,3 +301,82 @@ function arranged_div() {
 
 }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function rearrangeDivs() {
+    removeAllCardDivs()
+    enterDate = document.getElementById("filterdate").value
+
+    const container = document.getElementById("container-fluid");
+    container.innerHTML = '';
+    count = 0;
+    while (count < entris.length) {
+        if (enterDate == entris[count].date || enterDate === '') {
+
+            const newDiv = document.createElement("div");
+            newDiv.id = "creatediv";
+            newDiv.className = 'card_div'
+
+            newDiv.innerHTML = `
+            <div id="title-div">
+                <h3>${entris[count].title}</h3>
+                <h6>${entris[count].message}</h6>
+                <h6>${entris[count].date}</h6>
+            </div>
+            <div style="flex-grow: 1;"></div>
+            <div id="button-div">
+                <button type="button" id="delete" class="btn btn-success" onclick="datadelete(${count + 1})">Delete</button>
+                <button type="button" id="edit" class="btn btn-primary" data-bs-toggle="modal"
+                data-bs-target="#editmodal" onclick="editindex(${count + 1})">Edit</button>
+                <button type="button" id="mark" class="btn btn-danger" onclick="read(${count + 1})">Mark as complete</button>
+            </div>`
+        
+
+            // Append the new div to the container
+            container.appendChild(newDiv);
+        }
+
+        count++
+    }
+
+    // Set container styles outside the loop
+    container.style.flexDirection = "column";
+    container.style.alignItems = "center";
+    container.style.justifyContent = "flex-start";
+}
+
+function removeAllCardDivs() {
+    const deleter = document.getElementsByClassName('card_div');
+    while (deleter.length > 0) {
+        deleter[0].remove();
+    }
+    console.log("All card_div elements removed");
+}
+
+ 
+
