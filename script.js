@@ -15,6 +15,7 @@ Form.addEventListener("submit", (e) => {
     Title = document.getElementById("title").value
     Discription = document.getElementById("discription").value
     date = document.getElementById("date").value
+    $("#exampleModal").modal("hide");
     while (true) {
         console.log(`num = ${num}`);
         console.log(`index = ${edited_index}`);
@@ -25,7 +26,8 @@ Form.addEventListener("submit", (e) => {
         data = {
             title: `${Title}`,
             discription: `${Discription}`,
-            date: `${date}`
+            date: `${date}`,
+            Markascomplete: false
         }
         data_array.push(data)
         arranged_div()
@@ -52,28 +54,10 @@ edit_form.addEventListener("submit", (e) => {
     edit_title = document.getElementById("pass-title").value;
     edit_discription = document.getElementById("pass-discription").value;
     edit_date = document.getElementById("pass-date").value;
-    edited_data = {
-        title: `${edit_title}`,
-        discription: `${edit_discription}`,
-        date: `${edit_date}`
-    }
-
-    console.log(`edited index = ${edited_index}`);
-
-    data_array[edited_index] = edited_data;
-
-    console.log(data_array[edited_index]);
-    console.log(data_array);
-
-    let new_title = data_array[edited_index].title
-    let new_discription = data_array[edited_index].discription
-    let new_date = data_array[edited_index].date;
-
-    const cards = document.getElementsByClassName('passing-card')
-    const editingCard = cards[edited_index]
-    editingCard.querySelector(`#display-date`).innerHTML = `${new_date}`
-    editingCard.querySelector(`#display-title`).innerHTML = `${new_title}`
-    editingCard.querySelector(`#display-discription`).innerHTML = `${new_discription}`
+    data_array[edited_index].title = edit_title
+    data_array[edited_index].discription = edit_discription
+    data_array[edited_index].date = edit_date
+    arranged_div()
 });
 
 
@@ -84,10 +68,11 @@ function markascomplete(index) {
 
     if (div_element.classList.contains("completeclass")) {
         div_element.classList.remove("completeclass");
+        data_array[index - 1].Markascomplete = false
 
     } else {
         div_element.classList.add("completeclass");
-        // data_array[index - 1].
+        data_array[index - 1].Markascomplete = true
     }
 
 }
@@ -95,10 +80,8 @@ function markascomplete(index) {
 function delete_todo(deleting_index) {
     data_array.splice(deleting_index - 1, 1)
     let deletediv = document.getElementsByClassName("passing-card")
-    // let i = 0
     while (true) {
         deletediv[0].remove()
-        // console.log(deletediv);            // remove//
         if (deletediv.length === 0) {
             console.log("finish");
             break
@@ -118,33 +101,60 @@ function arranged_div() {
     let new_index = 0
 
     while (count < data_array.length) {
-        
+
         let selected_date = document.getElementById("list_date").value
+        let mark = data_array[count].Markascomplete
         if (selected_date == data_array[count].date || selected_date == "") {
+            if (mark == true) {
+                let date = data_array[count].date
+                let Title = data_array[count].title
+                let Discription = data_array[count].discription
 
 
-            let date = data_array[count].date
-            let Title = data_array[count].title
-            let Discription = data_array[count].discription
 
+                node = document.createElement("div")
+                node.className = "passing-card"
 
-
-            node = document.createElement("div")
-            node.className = "passing-card"
-
-            node.innerHTML = ` <div class="card" >
-            <div id="numb">${new_index+1}</div>
+                node.innerHTML = ` <div class="card completeclass" >
+            <div id="numb">${new_index + 1}</div>
              <div class="card-header" id="display-date">${date}</div>
             <div class="card-body">
                 <h5 class="card-title" id="display-title" >${Title}</h5>
                 <p class="card-text" id="display-discription">${Discription}</p>
-                <button onclick ="pass_index(${new_index + 1})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
+                <button onclick ="pass_index(${count + 1})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
                 <button onclick ="delete_todo(${new_index + 1})" type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
                 <button onclick ="markascomplete(${new_index + 1})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
             </div>
             </div> `
-            document.getElementById("scrolling-div").appendChild(node)
-            new_index++
+                document.getElementById("scrolling-div").appendChild(node)
+                new_index++
+            } else {
+                let date = data_array[count].date
+                let Title = data_array[count].title
+                let Discription = data_array[count].discription
+
+
+
+                node = document.createElement("div")
+                node.className = "passing-card"
+
+                node.innerHTML = ` <div class="card" >
+                    <div id="numb">${new_index + 1}</div>
+                    <div class="card-header" id="display-date">${date}</div>
+                    <div class="card-body">
+                        <h5 class="card-title" id="display-title" >${Title}</h5>
+                        <p class="card-text" id="display-discription">${Discription}</p>
+                        <button onclick ="pass_index(${count + 1})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
+                        <button onclick ="delete_todo(${new_index + 1})" type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
+                        <button onclick ="markascomplete(${new_index + 1})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
+                    </div>
+                    </div> `
+                document.getElementById("scrolling-div").appendChild(node)
+                new_index++
+
+            }
+
+
 
         }
 
@@ -152,7 +162,6 @@ function arranged_div() {
 
 
     }
-    // num = count
 
 }
 

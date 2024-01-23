@@ -9,6 +9,11 @@
         integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
     <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.10.2/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
 </head>
 
 <body>
@@ -36,14 +41,13 @@
                     </div>
                     <div class="modal-body">
                         <form id="form">
-                            <input id="title" placeholder="Title" type="text">
-                            <textarea id="discription" name="discription" id="text-area" cols="60" rows="2"
+                            <input required id="title" placeholder="Title" type="text">
+                            <textarea required id="discription" name="discription" id="text-area" cols="60" rows="2"
                                 placeholder="Description"></textarea>
-                            <input id="date" type="date">
-                            <div id="mssg"></div>
+                            <input required id="date" type="date">
                             <div class="modal-footer">
 
-                                <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">ADD</button>
+                                <button type="submit" class="btn btn-primary">ADD</button>
                             </div>
                         </form>
                     </div>
@@ -66,11 +70,10 @@
                     </div>
                     <div class="modal-body">
                         <form id="edit-form">
-                            <input id="pass-title" placeholder="Title" type="text">
-                            <textarea id="pass-discription" name="discription" id="text-area" cols="60" rows="2"
+                            <input required id="pass-title" placeholder="Title" type="text">
+                            <textarea required id="pass-discription" name="discription" id="text-area" cols="60" rows="2"
                                 placeholder="Description"></textarea>
-                            <input id="pass-date" type="date">
-                            <div id="mssg"></div>
+                            <input required id="pass-date" type="date">
                             <div class="modal-footer">
 
                                 <button type="submit" class="btn btn-primary" data-bs-dismiss="modal">EDIT</button>
