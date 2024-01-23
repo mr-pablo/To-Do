@@ -63,17 +63,15 @@ edit_form.addEventListener("submit", (e) => {
 
 function markascomplete(index) {
     console.log(index);
-    let div_array = document.getElementsByClassName("card")
-    let div_element = div_array[index - 1]
 
-    if (div_element.classList.contains("completeclass")) {
-        div_element.classList.remove("completeclass");
+    if (data_array[index - 1].Markascomplete === true) {
         data_array[index - 1].Markascomplete = false
 
     } else {
-        div_element.classList.add("completeclass");
         data_array[index - 1].Markascomplete = true
     }
+
+    arranged_div()
 
 }
 
@@ -123,7 +121,7 @@ function arranged_div() {
                 <p class="card-text" id="display-discription">${Discription}</p>
                 <button onclick ="pass_index(${count + 1})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
                 <button onclick ="delete_todo(${new_index + 1})" type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
-                <button onclick ="markascomplete(${new_index + 1})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
+                <button onclick ="markascomplete(${count + 1})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
             </div>
             </div> `
                 document.getElementById("scrolling-div").appendChild(node)
@@ -146,7 +144,7 @@ function arranged_div() {
                         <p class="card-text" id="display-discription">${Discription}</p>
                         <button onclick ="pass_index(${count + 1})"  type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#edit_modal">Edit</button>
                         <button onclick ="delete_todo(${new_index + 1})" type="button" class="btn btn-danger" data-bs-toggle="modal">Delete</button> 
-                        <button onclick ="markascomplete(${new_index + 1})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
+                        <button onclick ="markascomplete(${count + 1})" type="button" class="btn btn-primary" data-bs-toggle="modal">Mark As Completed</button>
                     </div>
                     </div> `
                 document.getElementById("scrolling-div").appendChild(node)
